@@ -51,6 +51,11 @@
       <SubType>Content</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <LibraryReference Include="lcls-twincat-motion,0.0.0,SLAC">
+      <Namespace>lcls_twincat_motion</Namespace>
+    </LibraryReference>
+  </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>

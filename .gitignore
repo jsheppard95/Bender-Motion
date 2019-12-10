@@ -2,13 +2,13 @@
 _Boot
 _Libraries
 _CompileInfo
-*.sln
 *.suo
 *~
 *.tpy
 *.bak
 *.~u
 TrialLicense.tclrs
+*.dbg
 
 # EPICS ignores
 O.*
@@ -24,3 +24,4 @@ dbd
 
 # TwinCAT Scope files
 *.csv
+*.svd

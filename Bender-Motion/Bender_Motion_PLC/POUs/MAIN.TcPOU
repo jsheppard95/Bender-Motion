@@ -1,27 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.14">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="MAIN" Id="{2f9042fa-41a7-4fd2-8aa4-dee837e83b8e}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	Axis1: AXIS_REF;
-	bEna1: BOOL;
-	fbPower1: MC_POWER;
-	bLimFwd1 AT %I*: BOOL;
-	bLimBwd1 AT %I*: BOOL;
-	nRawEnc1 AT %I*: ULINT;
-	fPosErr1: INT;
+	M1 : DUT_MotionStage:=(nCOmmand:=3); // Bender Motor
+	fbMotionStage : FB_MotionStage;
+	bSTOEnable AT %I* : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbPower1(Axis:=Axis1,
-	Enable:=bEna1,
-	Enable_Positive:=bLimFwd1,
-	Enable_Negative:=bLimBwd1);
-]]></ST>
+      <ST><![CDATA[// Button to enable motor: write 0 to enable, 2 to disable
+M1.nEnableMode;
+
+// Tie STO into Enable Bit:
+M1.bHardwareEnable := bSTOEnable;
+
+// Start Motion
+fbMotionStage (stMotionStage:=M1);]]></ST>
     </Implementation>
-    <LineIds Name="MAIN">
-      <LineId Id="13" Count="3" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
