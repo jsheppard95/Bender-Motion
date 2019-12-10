@@ -5,7 +5,8 @@
 VAR
 	M1 : DUT_MotionStage:=(nCOmmand:=3); // Bender Motor
 	fbMotionStage : FB_MotionStage;
-	bSTOEnable AT %I* : BOOL;
+	bSTOEnable1 AT %I* : BOOL;
+	bSTOEnable2 AT %I* : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -13,7 +14,7 @@ END_VAR
 M1.nEnableMode;
 
 // Tie STO into Enable Bit:
-M1.bHardwareEnable := bSTOEnable;
+M1.bHardwareEnable := bSTOEnable1 AND bSTOEnable2;
 
 // Start Motion
 fbMotionStage (stMotionStage:=M1);]]></ST>
